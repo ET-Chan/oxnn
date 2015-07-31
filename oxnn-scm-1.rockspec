@@ -2,7 +2,7 @@ package = "oxnn"
 version = "scm-1"
 
 source = {
-   url = "file:///home/et/code/eclipse/oxnn-proj/src"
+   url = "https://github.com/ET-Chan/oxnn"
 }
 
 description = {
@@ -17,7 +17,9 @@ dependencies = {
    "torch >= 7.0",
    "moses",
    "nn",
-   "cunn"
+   "cunn",
+   "nnx",
+   "nngraph"
 }
 
 build = {
