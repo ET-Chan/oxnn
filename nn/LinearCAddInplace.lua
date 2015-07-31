@@ -34,7 +34,9 @@ function LinearCAddInplace:updateGradInput(input, gradOutput)
    self.gradInput[1] = self.gradInput[1] or input[1].new()
    self.gradInput[1]:set(gradOutput)
    self.gradInput[2] = self.gradInput[2] or input[2].new()
+
    self.linear:updateGradInput(input[2], gradOutput)
+
    self.gradInput[2]:set(self.linear.gradInput)
    return self.gradInput
 end

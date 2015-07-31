@@ -97,6 +97,9 @@ end
 function RecurrentPropagator:_s_store(ref, froms, data, add, addhelper)
    if torch.type(ref) == 'table' then
       if data ~= NOT_SET then
+         if (#ref ~= #data) then
+          print (#ref, #data)
+         end
          assert(#ref == #data, 'Number of store elements mismatch.')
          for i, r in ipairs(ref) do
             self:_s_store(r, froms, data[i], add, addhelper)
@@ -300,7 +303,7 @@ function RecurrentPropagator:updateOutput(input)
                else
                   for i=1,new_clone_count do
                      table.insert(mcs[k], orig:__oxnn_RP_createCloneAndShareAll())
-                     collectgarbage()
+                   --  collectgarbage()
                   end
                end
                collectgarbage()

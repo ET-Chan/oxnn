@@ -114,6 +114,7 @@ struct tuple7_transform_functor
   }
 };
 
+#include <thrust/system/cuda/execution_policy.h>
 static int oxnn_LSTM12Part2_updateOutput(lua_State *L)
 {
   THCState *state = getCutorchState(L);
@@ -146,7 +147,7 @@ static int oxnn_LSTM12Part2_updateOutput(lua_State *L)
   thrust::device_ptr<float> raw_gates_data(THCudaTensor_data(state, raw_gates));
   thrust::device_ptr<float> next_c_data(THCudaTensor_data(state, next_c));
   thrust::device_ptr<float> next_h_data(THCudaTensor_data(state, next_h));
-  thrust::for_each(
+  thrust::for_each(thrust::cuda::par.on(state->currentStream),
                    thrust::make_zip_iterator(thrust::make_tuple(
                        prev_c_data,
                        make_skip_iterator(raw_gates_data+0, 4),
@@ -204,7 +205,7 @@ static int oxnn_LSTM12Part2_updateGradInput(lua_State *L)
   thrust::device_ptr<float> raw_gates_data(THCudaTensor_data(state, raw_gates));
   thrust::device_ptr<float> GOnext_c_data(THCudaTensor_data(state, GOnext_c));
   thrust::device_ptr<float> GOnext_h_data(THCudaTensor_data(state, GOnext_h));
-  thrust::for_each(
+  thrust::for_each(thrust::cuda::par.on(state->currentStream),
                    thrust::make_zip_iterator(thrust::make_tuple(
                        prev_c_data,
                        make_skip_iterator(raw_gates_data+0, 4),

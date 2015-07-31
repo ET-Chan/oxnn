@@ -12,6 +12,7 @@
 #include "ClassNLLCriterionD.cu"
 //#include "cuda.cu"
 #include "LSTM12Part2.cu"
+#include "events.cu"
 
 LUA_EXTERNC DLL_EXPORT int luaopen_liboxnn(lua_State *L);
 
@@ -23,6 +24,6 @@ int luaopen_liboxnn(lua_State *L)
   //oxnn_cuda_init(L);
   oxnn_ClassNLLCriterionD_init(L);
   oxnn_LSTM12Part2_init(L);
-
+  oxnn_event_init(L);
   return 1;
 }

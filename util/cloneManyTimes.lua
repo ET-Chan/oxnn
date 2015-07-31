@@ -94,7 +94,7 @@ function oxnn.cloneManyTimesFast(net, T)
       mem = torch.MemoryFile("w"):binary()
       mem:writeObject(clone)
    end
-   collectgarbage()
+   --collectgarbage()
 
    for t = 1, T do
       -- We need to use a new reader for each clone.
@@ -115,7 +115,7 @@ function oxnn.cloneManyTimesFast(net, T)
          end
       end
       clones[t] = clone
-      collectgarbage()
+     -- collectgarbage()
    end
    mem:close()
    return clones

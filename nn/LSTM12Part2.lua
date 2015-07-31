@@ -2,6 +2,7 @@
 --
 -- Component-wise "part 2" of LSTM fused into one kernel for CUDA.
 --
+
 local LSTM12Part2, parent = torch.class('oxnn.LSTM12Part2', 'nn.Container')
 
 function LSTM12Part2:__init()
@@ -44,8 +45,10 @@ function LSTM12Part2:updateGradInput(input, gradOutput)
    self.gradInput[1]:resizeAs(input[1]):copy(input[1])
 
    if torch.type(input[1]) == 'torch.CudaTensor' then
+
       input[1].oxnn.LSTM12Part2_updateGradInput(
          self.gradInput[1], self.gradInput[2], gradOutput[1], gradOutput[2])
+
    else
       self.gradInput = self._cpu:updateGradInput(input, gradOutput)
    end

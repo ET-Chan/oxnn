@@ -2,8 +2,7 @@ package = "oxnn"
 version = "scm-1"
 
 source = {
-   url = "git://github.com/tkocisky/oxnn",
-   tag = "master"
+   url = "file:///home/et/code/eclipse/oxnn-proj/src"
 }
 
 description = {
