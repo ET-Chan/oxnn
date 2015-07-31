@@ -9,7 +9,7 @@ description = {
    summary = "oxnn",
    detailed = [[
    ]],
-   homepage = "https://github.com/tkocisky/oxnn",
+   homepage = "https://github.com/ET-Chan/oxnn",
    license = "BSD"
 }
 
